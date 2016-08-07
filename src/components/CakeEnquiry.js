@@ -3,6 +3,8 @@
 import React from "react";
 import EnquiryForm from './EnquiryForm';
 
+import alert from "alerts";
+
 const stringIsEmpty = function stringIsEmpty (theString)
 {
 	let result = false;
@@ -36,7 +38,8 @@ class CakeEnquiry extends React.Component
 		this.reset ();
 	}
 
-	updateEnquiryState (event) {
+	updateEnquiryState (event)
+	{
 		const field = event.target.name;
 		let enquiry = this.state.enquiry;
 		enquiry [field] = event.target.value;
@@ -44,7 +47,8 @@ class CakeEnquiry extends React.Component
 		return this.setState ({enquiry: enquiry});
 	}
 	
-	updateEnquiryStateFromCheckbox (event) {
+	updateEnquiryStateFromCheckbox (event)
+	{
 		const field = event.target.name;
 		let enquiry = this.state.enquiry;
 		enquiry [field] = event.target.checked;
@@ -52,7 +56,12 @@ class CakeEnquiry extends React.Component
 		return this.setState ({enquiry: enquiry});
 	}
 	
-	reset() {
+	reset (event)
+	{
+		if (event)
+		{
+			event.preventDefault();
+		}
 		this.setState (
 			{
 				enquiry: {},
@@ -62,27 +71,32 @@ class CakeEnquiry extends React.Component
 		);
 	}
 	
-	sendEnquiry() {
-		// alert(this.state.value);
+	sendEnquiry (event)
+	{
+		event.currentTarget.blur ();	// prevent focus on button
+		event.preventDefault();
 		if (this.state.selectedCelebrationType == "Other" &&
 				stringIsEmpty (this.state.enquiry.Other))
 		{
 			this.setState ({errors: {Other: "Please tell us your celebration type"}});
-			//alert("Tells us about your celebration type, " + this.state.enquiry.Other);
 		}
 		else if (stringIsEmpty (this.state.enquiry.Name))
 		{
 			this.setState ({errors: {Name: "Please tell us your name"}});
-			//alert("Please tells us your name");
 		}
 		else if (stringIsEmpty (this.state.enquiry.Email))
 		{
 			this.setState ({errors: {Email: "Please tell us your email address"}});
-			//alert("Please tells us your email address");
 		}
 		else
 		{
-			alert ("Enquiry sent");
+			alert (
+				'Enquiry sent',
+				{
+					timeout: 3000,
+					className: 'alert-success'
+				}
+			);
 			this.reset();
 		}
 	}
@@ -106,7 +120,8 @@ class CakeEnquiry extends React.Component
 		return ["Birthday", "Wedding", "Corporate", "Other"];
 	}
 	
-	render () {
+	render ()
+	{
 		const enquiryFormProps = {
 			enquiry: this.state.enquiry,
 			cakeTypes: this.cakeTypes (),

@@ -2,8 +2,15 @@
 
 import {combineReducers} from 'redux';
 
+function dummyReducer (state = {}, action)
+{
+	return {};
+}
+
 const rootReducer = combineReducers (
-  {}
+  {
+  	dummyReducer
+  }
 );
 
 export default rootReducer;
