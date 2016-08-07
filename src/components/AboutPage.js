@@ -7,7 +7,9 @@ class AboutPage extends React.Component {
     return (
       <div>
         <h1>About</h1>
-        <p>This application uses React, Redux, React Router, Webpack, Mocha, Enzyme, Expect to demonstrate React Form Vvalidation and Test.  Written by Steve Steinitz.  Stack inspired from the PLuralsight Redux Course by Cory House</p>
+        <p>Built by Steve Steinitz, <a href="http://datatactics.com.au">Data Tactics</a>.</p>
+		<p>Uses React, Redux, React Router, Webpack, Mocha, Enzyme and Expect to demonstrate React Form validation and Test.  </p>
+		<p>Stack inspired from the Pluralsight Redux Course by Cory House.</p>
       </div>
     );
   }
