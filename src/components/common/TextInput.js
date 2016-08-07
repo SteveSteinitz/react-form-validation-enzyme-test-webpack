@@ -19,7 +19,7 @@ const TextInput = ({name, label, onChange, placeholder, value, error}) =>
           name={name}
           className="form-control dark-form-control"
           placeholder={placeholder}
-          defaultValue={value}
+          value={value}
           onChange={onChange}/>
         {error && <div className="alert alert-danger">{error}</div>}
       </div>

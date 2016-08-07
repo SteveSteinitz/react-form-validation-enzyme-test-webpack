@@ -3,6 +3,20 @@
 import React from "react";
 import EnquiryForm from './enquiryForm';
 
+const stringIsEmpty = function stringIsEmpty (theString)
+{
+	let result = false;
+	if (theString == null)
+	{
+		result = true;
+	}
+	if (theString === "")
+	{
+		result = true;
+	}
+	return result;
+};
+
 class CakeEnquiry extends React.Component
 {
   constructor(props, context)
@@ -42,17 +56,17 @@ class CakeEnquiry extends React.Component
   sendEnquiry() {
     // alert(this.state.value);
     if (this.state.selectedCelebrationType == "Other" &&
-        this.state.enquiry.Other == undefined)
+        stringIsEmpty (this.state.enquiry.Other))
     {
       this.setState ({errors: {Other: "Please tell us your celebration type"}});
       //alert("Tells us about your celebration type, " + this.state.enquiry.Other);
     }
-    else if (undefined == this.state.enquiry.Name)
+    else if (stringIsEmpty (this.state.enquiry.Name))
     {
       this.setState ({errors: {Name: "Please tell us your name"}});
       //alert("Please tells us your name");
     }
-    else if (undefined == this.state.enquiry.Email)
+    else if (stringIsEmpty (this.state.enquiry.Email))
     {
       this.setState ({errors: {Email: "Please tell us your email address"}});
       //alert("Please tells us your email address");
