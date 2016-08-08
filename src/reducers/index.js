@@ -8,9 +8,9 @@ function dummyReducer (state = {}, action)
 }
 
 const rootReducer = combineReducers (
-  {
-  	dummyReducer
-  }
+	{
+		dummyReducer
+	}
 );
 
 export default rootReducer;

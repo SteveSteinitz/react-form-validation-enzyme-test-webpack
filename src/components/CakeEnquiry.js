@@ -58,6 +58,7 @@ class CakeEnquiry extends React.Component
 		if (enquiry)
 		{
 			let value  = enquiry [fieldName];
+			// console.log ("textInputValue - value = " + value);
 			if (!stringIsEmpty (value))
 			{
 				result = value;
