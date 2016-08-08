@@ -23,7 +23,7 @@ class EnquiryForm extends React.Component
 				);
 			}
 		);
-		
+
 		let celebrationTypeRadioButtons = this.props.celebrationTypes.map (
 			function (aCelebrationType)
 			{
@@ -43,22 +43,23 @@ class EnquiryForm extends React.Component
 				return radioButton;
 			}
 		);
-				
+
 		return (
 			<div className="enquiry-form u-clearfix">
 				<fieldset className = "enquiry"> <legend className = "enquiry">Cake Enquiry Form</legend>
 				<TextInput
-					name		="Name"
-					label		="Name:"
-					value		={this.props.enquiry.Name}
-					onChange	={this.props.onChange}
-					error		={this.props.errors.Name}/>
+					name		= "Name"
+					label		= "Name:"
+					value		= {this.props.textInputValueFunction ("Name")}
+					placeholder = ""
+					onChange	= {this.props.onChange}
+					error		= {this.props.errors.Name}/>
 				<TextInput
-					name		="Email"
-					label		="Email:"
-					value		={this.props.enquiry.Email}
-					onChange	={this.props.onChange}
-					error		={this.props.errors.Email}/>
+					name		= "Email"
+					label		= "Email:"
+					value		= {this.props.textInputValueFunction ("Email")}
+					onChange	= {this.props.onChange}
+					error		= {this.props.errors.Email}/>
 
 					<label>Type of cake:</label>
 					{cakeTypeCheckboxes}
@@ -67,7 +68,7 @@ class EnquiryForm extends React.Component
 					{celebrationTypeRadioButtons}
 				<TextInput
 					name="Other"
-					value={this.props.enquiry.Other}
+					value		= {this.props.textInputValueFunction ("Other")}
 					onChange={this.props.onChange}
 					error={this.props.errors.Other}/>
 					<label>Tell us about your dream cake:</label>
@@ -106,6 +107,7 @@ EnquiryForm.propTypes = {
 	celebrationTypes: React.PropTypes.array.isRequired,
 	onCelebrationTypeChange: React.PropTypes.func.isRequired,
 	selectedCelebrationType: React.PropTypes.string.isRequired,
+	textInputValueFunction: React.PropTypes.func.isRequired,
 	errors: React.PropTypes.object
 };
 

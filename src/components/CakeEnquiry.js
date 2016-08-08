@@ -25,37 +25,59 @@ class CakeEnquiry extends React.Component
 	{
 		super(props, context);
 
-		this.updateEnquiryState				= this.updateEnquiryState.bind (this);
-		this.updateEnquiryStateFromCheckbox	= this.updateEnquiryStateFromCheckbox.bind (this);
-		this.reset							= this.reset.bind (this);
-		this.sendEnquiry					= this.sendEnquiry.bind (this);
-		this.onCelebrationTypeChange		= this.onCelebrationTypeChange.bind (this);
-	
+		this.updateEnquiryTextInput         = this.updateEnquiryTextInput.bind (this);
+		this.updateEnquiryStateFromCheckbox = this.updateEnquiryStateFromCheckbox.bind (this);
+		this.reset                          = this.reset.bind (this);
+		this.sendEnquiry                    = this.sendEnquiry.bind (this);
+		this.onCelebrationTypeChange        = this.onCelebrationTypeChange.bind (this);
+		this.textInputValue        			= this.textInputValue.bind (this);
 	}
-	
+
 	componentWillMount ()
 	{
 		this.reset ();
 	}
 
-	updateEnquiryState (event)
+	updateEnquiryTextInput (event)
 	{
+		let value = event.target.value;
+		if (stringIsEmpty (value))
+		{
+			value = "";
+		}
 		const field = event.target.name;
 		let enquiry = this.state.enquiry;
-		enquiry [field] = event.target.value;
-		// console.log ("updateEnquiryState - setting " + field + " to " + event.target.value);
-		return this.setState ({enquiry: enquiry});
+		enquiry [field] = value;
+		this.setState ({enquiry: enquiry});
 	}
-	
+
+	textInputValue (fieldName)
+	{
+		let result = "";
+		const enquiry = this.state.enquiry;
+		if (enquiry)
+		{
+			let value  = enquiry [fieldName];
+			if (!stringIsEmpty (value))
+			{
+				result = value;
+			}
+		}
+		return result;
+	}
+
 	updateEnquiryStateFromCheckbox (event)
 	{
-		const field = event.target.name;
-		let enquiry = this.state.enquiry;
-		enquiry [field] = event.target.checked;
-		// console.log ("updateEnquiryState - setting " + field + " to " + event.target.value);
-		return this.setState ({enquiry: enquiry});
+		const checked = event.target.checked;
+		if (typeof checked != 'undefined')
+		{
+			const field = event.target.name;
+			let enquiry = this.state.enquiry;
+			enquiry [field] = checked;
+			this.setState ({enquiry: enquiry});
+		}
 	}
-	
+
 	reset (event)
 	{
 		if (event)
@@ -70,7 +92,7 @@ class CakeEnquiry extends React.Component
 			}
 		);
 	}
-	
+
 	sendEnquiry (event)
 	{
 		event.currentTarget.blur ();	// prevent focus on button
@@ -100,7 +122,7 @@ class CakeEnquiry extends React.Component
 			this.reset();
 		}
 	}
-	
+
 	onCelebrationTypeChange (event)
 	{
 		this.setState (
@@ -109,17 +131,17 @@ class CakeEnquiry extends React.Component
 			}
 		);
 	}
-	
+
 	cakeTypes ()
 	{
 		return ["Cupcakes", "Cheesecakes", "Butter Cakes", "Mudcakes"];
 	}
-	
+
 	celebrationTypes ()
 	{
 		return ["Birthday", "Wedding", "Corporate", "Other"];
 	}
-	
+
 	render ()
 	{
 		const enquiryFormProps = {
@@ -128,11 +150,12 @@ class CakeEnquiry extends React.Component
 			celebrationTypes: this.celebrationTypes(),
 			onSubmit: this.sendEnquiry,
 			onReset: this.reset,
-			onChange: this.updateEnquiryState,
+			onChange: this.updateEnquiryTextInput,
 			onCheckboxChange: this.updateEnquiryStateFromCheckbox,
 			onCelebrationTypeChange: this.onCelebrationTypeChange,
 			selectedCelebrationType: this.state.selectedCelebrationType,
-			errors: this.state.errors
+			errors: this.state.errors,
+			textInputValueFunction: this.textInputValue
 		};
 		return (
 			<div className = "cake-enquiry">
