@@ -7,7 +7,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin'); // http://stac
 
 export default {
   debug: true,
-  devtool: 'cheap-module-eval-source-map', // special source map for development
+  // devtool: 'cheap-module-eval-source-map', // special source map for development, but doesn't allow webstorm debug
+  // devtool: DEBUG ? 'source-map' : false,
+  devtool: 'eval-source-map',
   noInfo: false,
   entry: [
     'eventsource-polyfill', // necessary for hot reloading with IE

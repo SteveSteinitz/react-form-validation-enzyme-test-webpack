@@ -41,7 +41,7 @@ class CakeEnquiry extends React.Component
 	updateEnquiryTextInput (event)
 	{
 		let value = event.target.value;
-		if (stringIsEmpty (value))
+		if (stringIsEmpty (value)) // avoid React warning - may not be needed with the method below
 		{
 			value = "";
 		}
@@ -51,7 +51,7 @@ class CakeEnquiry extends React.Component
 		this.setState ({enquiry: enquiry});
 	}
 
-	textInputValue (fieldName)
+	textInputValue (fieldName) // needed to avoid React warning
 	{
 		let result = "";
 		const enquiry = this.state.enquiry;
