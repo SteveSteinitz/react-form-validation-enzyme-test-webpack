@@ -32,6 +32,6 @@ I use the Allman style of bracing.  I acknowledge that it's less popular but I l
 
 I used tabs set to 4 spaces.  That editor setting will show attributes neatly lined up, for example.  I feel that using 2 spaces is unnecessarily stingy.  
 
-I try to avoid  ({  amd }) since they make no sense, and instead put object arguments on their own line.  I do other similar things to make importat parts of the code 'pop'.
+I try to avoid  ({ and }) since they make no sense, and instead put object arguments on their own line.  I do other similar things to make important parts of the code 'pop'.
 
-I've carefully cafted the code style for readability and quick comprehension (and, I confess, beauty).
+I've carefully crafted the code style for readability and quick comprehension (and, I confess, beauty).
